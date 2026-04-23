@@ -1,0 +1,40 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Frontend: Install & Dev",
+      "type": "shell",
+      "command": "cd frontend && npm install && npm run dev",
+      "isBackground": true,
+      "problemMatcher": [
+        {
+          "pattern": "$tsc"
+        }
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Backend: Python Dependencies & Run",
+      "type": "shell",
+      "command": "cd backend && python -m venv venv && source venv/bin/activate && pip install -r requirements.txt && python main.py",
+      "isBackground": true,
+      "group": "build"
+    },
+    {
+      "label": "Docker: Start Services",
+      "type": "shell",
+      "command": "docker-compose up",
+      "isBackground": true,
+      "group": "build"
+    },
+    {
+      "label": "Docker: Stop Services",
+      "type": "shell",
+      "command": "docker-compose down",
+      "group": "build"
+    }
+  ]
+}

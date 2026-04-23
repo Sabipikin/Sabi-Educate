@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: sabipath_db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: sabipath
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - sabipath_network
+
+  api:
+    build: ./backend
+    container_name: sabipath_api
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      DATABASE_URL: postgresql://user:password@postgres:5432/sabipath
+      DEBUG: "True"
+    depends_on:
+      - postgres
+    networks:
+      - sabipath_network
+
+  web:
+    build: ./frontend
+    container_name: sabipath_web
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    networks:
+      - sabipath_network
+
+  admin:
+    build: ./admin
+    container_name: sabipath_admin
+    ports:
+      - "3002:3000"
+    volumes:
+      - ./admin:/app
+    networks:
+      - sabipath_network
+
+volumes:
+  postgres_data:
+
+networks:
+  sabipath_network:
+    driver: bridge
