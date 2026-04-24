@@ -60,29 +60,29 @@ export default function CoursePage() {
       
       try {
         setLoadingContent(true);
-        const courseData = await apiService.getCourse(courseId, token);
+        const courseData = await apiService.getCourse(courseId as number, token || undefined);
         setCourse(courseData);
 
-        const lessonsData = await apiService.getCourseLessons(courseId, token);
+        const lessonsData = await apiService.getCourseLessons(courseId as number, token || undefined);
         setLessons(lessonsData);
 
         if (token) {
-          const enrollmentResponse = await apiService.getMyEnrollment(courseId, token).catch(() => null);
+          const enrollmentResponse = await apiService.getMyEnrollment(courseId as number, token).catch(() => null);
           setEnrollment(enrollmentResponse);
 
-          const canEnrollResponse = await apiService.canEnrollCourse(courseId, token).catch(() => null);
+          const canEnrollResponse = await apiService.canEnrollCourse(courseId as number, token).catch(() => null);
           setCanEnroll(canEnrollResponse);
 
           if (enrollmentResponse?.status === 'active') {
-            const modulesData = await apiService.getCourseModules(courseId, token);
+            const modulesData = await apiService.getCourseModules(courseId as number, token);
             setModules(modulesData);
             if (modulesData.length > 0) {
               setSelectedModule(modulesData[0]);
-              const contentData = await apiService.getModuleContent(courseId, modulesData[0].id, token);
+              const contentData = await apiService.getModuleContent(courseId as number, modulesData[0].id, token);
               setModuleContent(contentData);
             }
             setCourseProgressLoading(true);
-            apiService.getCourseProgress(courseId, token).then(setCourseProgress).catch(err => {
+            apiService.getCourseProgress(courseId as number, token).then(setCourseProgress).catch(err => {
               console.error('Failed to load course progress:', err);
               setCourseProgress(null);
             }).finally(() => setCourseProgressLoading(false));
