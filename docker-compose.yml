@@ -41,16 +41,6 @@ services:
     networks:
       - sabipath_network
 
-  admin:
-    build: ./admin
-    container_name: sabipath_admin
-    ports:
-      - "3002:3000"
-    volumes:
-      - ./admin:/app
-    networks:
-      - sabipath_network
-
 volumes:
   postgres_data:
 

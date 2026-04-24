@@ -20,7 +20,7 @@ A comprehensive learning management system (LMS) built with modern web technolog
 ### Advanced Features
 - **Portfolio Builder**: Create professional portfolios with projects and CV
 - **Gamification**: Points, streaks, and achievements system
-- **Admin Dashboard**: Comprehensive admin panel for content management
+- **Admin Dashboard**: Comprehensive admin panel for content management (separate repository)
 - **Subscription Management**: Handle user subscriptions and payments
 - **AI-Powered Career Guidance**: Smart career recommendations
 
@@ -34,22 +34,18 @@ A comprehensive learning management system (LMS) built with modern web technolog
 
 ```
 sabipath/
-├── admin/              # Admin dashboard (Next.js)
-│   ├── components/     # Reusable components
-│   ├── pages/         # Admin pages
-│   └── services/      # API services
 ├── frontend/           # Student/Teacher frontend (Next.js)
 │   ├── components/     # Reusable components
-│   ├── pages/         # Application pages
-│   ├── services/      # API services
-│   └── context/       # React context providers
+│   ├── pages/          # Application pages
+│   ├── services/       # API services
+│   └── context/        # React context providers
 ├── backend/            # FastAPI backend
-│   ├── routes/        # API route handlers
-│   ├── models/        # SQLAlchemy models
-│   ├── schemas/       # Pydantic schemas
-│   └── main.py        # Application entry point
+│   ├── routes/         # API route handlers
+│   ├── models/         # SQLAlchemy models
+│   ├── schemas/         # Pydantic schemas
+│   └── main.py         # Application entry point
 ├── docker-compose.yml  # Docker configuration
-└── README.md          # This file
+└── README.md           # This file
 ```
 
 ## 🛠️ Tech Stack
@@ -76,7 +72,7 @@ sabipath/
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+ (for frontend/admin)
+- Node.js 18+ (for frontend)
 - Python 3.11+ (for backend)
 - Docker & Docker Compose (optional)
 - PostgreSQL (if not using Docker)
@@ -93,7 +89,6 @@ docker-compose up -d
 
 # Access the applications
 # Frontend: http://localhost:3000
-# Admin: http://localhost:3001
 # API: http://localhost:8000
 # API Docs: http://localhost:8000/docs
 ```
@@ -258,15 +253,7 @@ npm run dev
 ```
 
 #### 3. Admin Setup
-```bash
-cd admin
-
-# Install dependencies
-npm install
-
-# Run the admin panel
-npm run dev
-```
+The admin panel is hosted in a separate repository: `Sabi-Admin`. Clone and deploy it independently.
 
 ## 📚 API Documentation
 
@@ -341,9 +328,6 @@ The application uses PostgreSQL with the following main entities:
 ```bash
 # Frontend
 cd frontend && npm run build
-
-# Admin
-cd admin && npm run build
 ```
 
 2. **Use production Docker setup:**
