@@ -1,9 +1,3 @@
-# Netlify redirects for Next.js
+# Netlify configuration for Next.js static export
+# Catch-all rule - serve index.html for any URL that doesn't match an existing file
 /*    /index.html   200
-
-# Handle API routes
-/api/*  /.netlify/functions/api/:splat  200
-
-# Handle Next.js pages
-/*    /_next/static/*  200
-/*    /_next/image*    200
