@@ -143,6 +143,27 @@ SUPABASE_KEY=your-supabase-service-key
 
 The backend already supports cloud Postgres by reading `DATABASE_URL` from environment variables, so deployment can use any managed Postgres service.
 
+### Neon Postgres Setup
+Neon is a great choice for cloud testing and deployment. To use Neon with this app:
+
+1. Create a Neon project at https://neon.tech
+2. Create a database branch (usually `main` or `dev`)
+3. Copy the connection string from the Neon dashboard
+4. Set `DATABASE_URL` in `backend/.env` to the Neon URL
+
+Example Neon `.env` entry:
+```env
+DATABASE_URL=postgresql://<username>:<password>@<host>:5432/<database>?sslmode=require
+DEBUG=False
+```
+
+> If your Neon URL does not already include `sslmode=require`, add it manually.
+
+### Using Neon with Docker Compose
+If you're deploying only the backend and want to use Neon instead of local Postgres, set the cloud `DATABASE_URL` in `backend/.env` and omit the `postgres` service in your deployment environment. The app will connect directly to Neon.
+
+This repository does not need any code changes to use Neon, because `backend/database.py` reads `DATABASE_URL` from environment variables and starts SQLAlchemy accordingly.
+
 #### 2. Frontend Setup
 ```bash
 cd frontend
